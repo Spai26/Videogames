@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "rootDirs": ["./src"],
+    "outDir": "build",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "paths": {
+      "@config/*": ["./src/config/*"]
+    }
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules", "build", "src/test"]
+}
