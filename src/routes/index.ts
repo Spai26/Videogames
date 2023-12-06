@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import { readdirSync } from "fs";
 import { Router } from "express";
 
 const pathRoute = `${__dirname}`;
@@ -7,21 +7,15 @@ const removeExtends = (filename: string) => {
   return filename.split(".").shift();
 };
 
-export const ApiRouter = ({ models }) => {
-  const apiRoute = Router();
+const apiRoute = Router();
 
-  fs.readdirSync(pathRoute).forEach((filename) => {
-    const routefile = removeExtends(filename);
-    if (routefile !== "index" && models) {
-      import(`./${routefile}.routes`).then((moduleRouter) => {
-        const nameModel = models;
-        apiRoute.use(
-          `/${routefile}`,
-          moduleRouter.createRoute({ model: nameModel })
-        );
-      });
-    }
-  });
+readdirSync(pathRoute).forEach((filename) => {
+  const routefile = removeExtends(filename);
+  if (routefile !== "index") {
+    import(`./${routefile}.routes`).then((moduleRouter) => {
+      apiRoute.use(`/${routefile}`, moduleRouter.router);
+    });
+  }
+});
 
-  return apiRoute;
-};
+export { apiRoute };

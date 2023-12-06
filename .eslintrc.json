@@ -28,7 +28,7 @@
         "plugin": [
           "module-resolve",
           {
-            "alias": { "@config": "./src/config" }
+            "alias": { "@config": "./src/config", "@routes": "./src/routes" }
           }
         ]
       }
