@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
 import { ConfigType } from "./server";
+import dotenv from "dotenv";
 
 dotenv.config();
 
