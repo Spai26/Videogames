@@ -1,21 +1,47 @@
-import mysql from "mysql2";
+import { Connection, createConnection } from "mysql2";
+import { DATABASE_CONFIG } from "./variablesDontenv";
 
-/* // Create the connection to the database
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+export class Database {
+  private static instance: Database;
+  private connetion: Connection | undefined;
 
-// simple query
-connection.query("show tables", function (err, results, fields) {
-  console.log(results); // results contains rows returned by server
-  console.log(fields); // fields contains extra metadata about results, if available
-}); */
+  private constructor() {}
 
-// Example with placeholders
-/* connection.query(
-  "select 1 from dual where ? = ?",
-  [1, 1],
-  function (err, results) {
-    console.log(results);
+  static getInstance(): Database {
+    if (!Database.instance) {
+      Database.instance = new Database();
+    }
+    return Database.instance;
   }
-);
 
-connection.end(); */
+  connect(): Connection {
+    if (!this.connetion) {
+      const env = process.env.APP_ENVIRONMENT;
+
+      const connectionString =
+        env !== "production" ? DATABASE_CONFIG.ENV : DATABASE_CONFIG.PROD;
+
+      this.connetion = createConnection(connectionString);
+    }
+
+    this.connetion.connect((err) => {
+      if (err) {
+        console.error(`Error connect to database,${err}`);
+        return;
+      }
+      console.log("connect database succefull!");
+    });
+
+    return this.connetion;
+  }
+
+  close(): void {
+    if (this.connetion) {
+      this.connetion.end((err) => {
+        console.error(`Error disconnect to database,${err}`);
+        return;
+      });
+    }
+    console.log("disconnect database succefull!");
+  }
+}
