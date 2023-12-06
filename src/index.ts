@@ -1,12 +1,5 @@
-import express from "express";
-import { prueba } from "@config/server";
+import { CONFIG_PROJECT } from "@config/variablesDontenv";
+import { App, Server } from "./config";
 
-const app = express();
-
-app.get("/", (req, res) => {
-  return res.send("banda");
-});
-
-app.listen(3000, () => {
-  console.log(prueba);
-});
+const serverApp = new Server({ config: CONFIG_PROJECT }, App);
+serverApp.start();
