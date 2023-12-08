@@ -31,7 +31,7 @@
             "alias": {
               "@config": "./src/config",
               "@routes": "./src/routes",
-              "@repository": "./src/repositories",
+              "@repositories": "./src/repositories",
               "@middlewares": "./src/middlewares"
             }
           }

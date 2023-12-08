@@ -3,7 +3,6 @@ import { apiRoute } from "@routes/index";
 import { corsMiddleware } from "@middlewares/cors";
 
 
-
 const App = express();
 
 App.use(express.json()); // acepte json entradas
