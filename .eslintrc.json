@@ -28,7 +28,11 @@
         "plugin": [
           "module-resolve",
           {
-            "alias": { "@config": "./src/config", "@routes": "./src/routes" }
+            "alias": {
+              "@config": "./src/config",
+              "@routes": "./src/routes",
+              "@repository": "./src/repositories"
+            }
           }
         ]
       }
