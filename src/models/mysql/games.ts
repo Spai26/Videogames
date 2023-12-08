@@ -1,4 +1,4 @@
-import { BaseRepository } from "@repositories/BaseRespository";
+import { BaseRepository } from "../../repositories/index";
 
 export interface IGame {
   id: string;

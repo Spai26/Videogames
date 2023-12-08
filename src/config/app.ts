@@ -1,8 +1,6 @@
 import express from "express";
 import { apiRoute } from "../routes/index";
-import { corsMiddleware } from "@middlewares/cors";
-
-
+import { corsMiddleware } from "../middlewares/index";
 
 const App = express();
 
